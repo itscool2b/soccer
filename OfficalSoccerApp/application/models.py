@@ -17,6 +17,7 @@ class DashboardStats(models.Model):
     total_red_cards = models.IntegerField()
     total_blue_cards = models.IntegerField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    date = models.DateField()
 class Player(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
 
@@ -29,7 +30,7 @@ class StatsPerGame(models.Model):
     saves = models.IntegerField()
     clean_sheets = models.IntegerField()
     issued_card = models.IntegerField()
-    
+    date = models.DateField()
 
     assister = models.ForeignKey(Player, on_delete=models.SET_NULL, related_name='assists_provided', null=True, blank=True)
     goalscorer = models.ForeignKey(Player, on_delete=models.SET_NULL, related_name='goals_scored', null=True, blank=True)

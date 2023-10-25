@@ -65,3 +65,16 @@ def StatsPerGame(request):
     
 
 
+@login_required
+def DashboardStatsUpdate(request):
+    instance = DashboardStats.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = DashboardStatsForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Data updated successfully")
+        else:
+            messages.error(request,"Error")
+    
+    else:
+        form = DashboardStatsForm(instance=instance)
