@@ -1,24 +1,26 @@
 from django.shortcuts import render
 from .forms import DashboardStatsForm, StatsPerGameForm, PlayerForm, UserForm
 from .models import CustomUser
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
-def sign_up(request):
+def usersignup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         username = form.cleaned_data['username']
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            if CustomUser.objects.filter(username=username).exists():
+                messages.error(request,"This username is already take")
+            else:
+                user = form.save()
+                login(request, user)
+        else:
+            messages.error(request, "try again something went wrong")
         
-        if CustomUser.objects.filter(username=username).exists():
-            message.error(request,"This username is already take")
-    else:
-        form = UserForm
-    
     return
 
-def login(request):
+def userlogin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -26,9 +28,11 @@ def login(request):
         if user is not None:
             login(request, user)
             return
+        else:
+            messages.error(request, "something went wrong")
     return
 
-def logout(request):
+def userlogout(request):
     logout(request)
     return
 

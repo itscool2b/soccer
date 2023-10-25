@@ -1,5 +1,10 @@
 from django.db import models
 
+
+class CustomUser(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.IntegerField()
+
 class DashboardStats(models.Model):
     games_played = models.IntegerField()
     wins = models.IntegerField()
