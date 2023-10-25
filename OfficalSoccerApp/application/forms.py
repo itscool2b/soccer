@@ -6,12 +6,12 @@ from .models import CustomUser
 class DashboardStatsForm(forms.ModelForm):
     class Meta:
         model = DashboardStats
-        fields = '__all__'
+        exclude = ['user']
 
 class StatsPerGameForm(forms.ModelForm):
     class Meta:
         model = StatsPerGame
-        fields = '__all__'
+        exclude = ['user']
 
 class PlayerForm(forms.ModelForm):
     class Meta:
