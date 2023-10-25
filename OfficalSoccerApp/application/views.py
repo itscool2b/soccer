@@ -36,5 +36,28 @@ def userlogout(request):
     logout(request)
     return
 
+@login_required
+def DashBoardStats(request):
+    if request.method == 'POST':
+        info = DashboardStatsForm(request.POST)
+        if info.is_valid():
+            info.save()
+            messages.success(request, "Data saved successfully")
+        else:
+            messages.error(request, "Invalid information. Please check the form.")
+    return
+
+@login_required
+def StatsPerGame(request):
+    if request.method == 'POST':
+        info = StatsPerGameForm(request.POST)
+        if info.is_valid():
+            info.save()
+            messages.success(request, "Data saved successfully")
+        else:
+            messages.error(request, "invalid info")
+    return
+
+    
 
 
