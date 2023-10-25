@@ -6,5 +6,6 @@ urlpatterns = [
     path('login/', views.userlogin, name='login'),
     path('logout/', views.userlogout, name='logout'),
     path("StatsPerGame/", views.StatsPerGame, name='StatsPerGame'),
-    path("DashBoardStats/", views.DashBoardStats, name='DashboardStats')
+    path("DashboardStats/", views.DashboardStats, name='DashboardStats'),
+    path("games/<int:id>/", views.AllGames, name='all')
 ]

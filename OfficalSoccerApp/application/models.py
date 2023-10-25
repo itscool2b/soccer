@@ -22,6 +22,7 @@ class Player(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
 
 class StatsPerGame(models.Model):
+    vs = models.CharField(max_length=100)
     goals = models.IntegerField()
     assists = models.IntegerField()
     completed_passes = models.IntegerField()
