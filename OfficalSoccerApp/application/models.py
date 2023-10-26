@@ -20,7 +20,12 @@ class DashboardStats(models.Model):
     date = models.DateField()
 class Player(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
-
+    assists = models.IntegerField()
+    yellow_cards = models.IntegerField()
+    red_cards = models.IntegerField()
+    goals = models.IntegerField()
+    shutouts = models.IntegerField()
+    saves = models.IntegerField()
 class StatsPerGame(models.Model):
     vs = models.CharField(max_length=100)
     goals = models.IntegerField()

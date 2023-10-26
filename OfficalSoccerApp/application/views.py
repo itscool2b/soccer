@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .forms import DashboardStatsForm, StatsPerGameForm, PlayerForm, UserForm
-from .models import CustomUser, StatsPerGame
+from .models import CustomUser
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 # Create your views here.
+from .models import Player, StatsPerGame
 
 def usersignup(request):
     if request.method == 'POST':
@@ -79,5 +80,17 @@ def DashboardStatsUpdate(request):
     else:
         form = DashboardStatsForm(instance=instance)
 
-def AllGames(request, id):
-    games = StatsPerGame.objects.get(id=id)
+def AllGames(request):
+    games = StatsPerGame.objects.all()
+    return
+
+def GameDetail(request, id):
+    game = StatsPerGame.objects.get(pk=id)
+    return
+
+def AllPlayers(request):
+    all = Player.objects.all()
+    return
+
+def PlayerDetail(request,id):
+    player = Player.objects.get(pk=id)
