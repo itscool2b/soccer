@@ -82,7 +82,7 @@ def DashboardStatsUpdate(request):
 
 def AllGames(request):
     games = StatsPerGame.objects.all()
-    return
+    return render(request, 'index.html', games)
 
 def GameDetail(request, id):
     game = StatsPerGame.objects.get(pk=id)
