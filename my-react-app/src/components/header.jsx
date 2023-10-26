@@ -11,7 +11,7 @@ function Header() {
           style={{ maxWidth: '15vw', height: 'auto', borderRadius: '10px', marginRight: '2vw' }}
         />
         <h1 className="text-2xl font-bold">Soccer App</h1>
-        <button className="bg-blue-700 hover:bg-blue-800 text-white font-semibold mr-7 py-2 px-4 border border-blue-700 rounded shadow">
+        <button className="bg-blue-700 hover:bg-blue-800 text-white font-semibold mr-7 py-2 px-4 border border-blue-700 rounded shadow" method="POST">
             Add Game
         </button>
       </header>
