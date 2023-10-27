@@ -34,7 +34,7 @@
         <div class="card">
             <img src="../static/images/victoryGreen.jpg" class="card-img-top" alt="Victory">
             <div class="card-body">
-                <h4 class="card-title">Windermere Prep Vs Montverd</h4> <!-- Dynamic Shit -->
+                <h4 class="card-title">{{game.title}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
                 <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal"
                     data-bs-target="#gameModal1"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
@@ -47,7 +47,7 @@
         <div class="card">
             <img src="../static/images/lossRed.jpeg" class="card-img-top" alt="Victory">
             <div class="card-body">
-                <h4 class="card-title">Windermere Prep Vs LHP</h4> <!-- Dynamic Shit -->
+                <h4 class="card-title">{{game.title}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
                 <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" 
                     data-bs-target="#gameModal2"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
@@ -70,17 +70,17 @@
                     </div>
                     <div class="modal-body">
                         <!-- Details inside Modal Dynamic Shit -->
-                        <p>Date: 07/04/2023</p>
-                        <p>Location: Soccer Field</p>
-                        <p>Time: 5:00 PM</p>
-                        <p>Total Goals: 50</p>
-                        <p>Assists: 10</p>
-                        <p>Completed Passes: 10</p>
-                        <p>Total Passes: 10</p>
-                        <p>Turn Overs: 10</p>
-                        <p>Saves: 10</p>
-                        <p>Clean Sheets: 10</p>
-                        <p>Issued Cards: 10</p>
+                        <p>Date: {{ game.date }}</p>
+<p>Opponent: {{ game.vs }}</p>
+<p>Goals: {{ game.goals }}</p>
+<p>Assists: {{ game.assists }}</p>
+<p>Completed Passes: {{ game.completed_passes }}</p>
+<p>Total Passes: {{ game.total_passes }}</p>
+<p>Turnovers: {{ game.turnovers }}</p>
+<p>Saves: {{ game.saves }}</p>
+<p>Clean Sheets: {{ game.clean_sheets }}</p>
+<p>Issued Cards: {{ game.issued_card }}</p>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -100,17 +100,17 @@
                     </div>
                     <div class="modal-body">
                         <!-- Details inside Modal - Dynamic Shit -->
-                        <p>Date: 07/04/2023</p>
-                        <p>Location: Soccer Field</p>
-                        <p>Time: 5:00 PM</p>
-                        <p>Total Goals: 50</p>
-                        <p>Assists: 10</p>
-                        <p>Completed Passes: 10</p>
-                        <p>Total Passes: 10</p>
-                        <p>Turn Overs: 10</p>
-                        <p>Saves: 10</p>
-                        <p>Clean Sheets: 10</p>
-                        <p>Issued Cards: 10</p>
+                        <p>Date: {{ game.date }}</p>
+                        <p>Opponent: {{ game.vs }}</p>
+                        <p>Goals: {{ game.goals }}</p>
+                        <p>Assists: {{ game.assists }}</p>
+                        <p>Completed Passes: {{ game.completed_passes }}</p>
+                        <p>Total Passes: {{ game.total_passes }}</p>
+                        <p>Turnovers: {{ game.turnovers }}</p>
+                        <p>Saves: {{ game.saves }}</p>
+                        <p>Clean Sheets: {{ game.clean_sheets }}</p>
+                        <p>Issued Cards: {{ game.issued_card }}</p>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
