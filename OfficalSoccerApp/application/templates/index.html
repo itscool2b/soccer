@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soccer App</title>
-    <link rel="stylesheet" href="{% static 'k.css' %}">
+    <link rel="stylesheet" href="../static/k.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 
-    <header class="container">
+    <header class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-4">
                 <a href="/" class="d-inline-flex align-items-center link-body-emphasis text-decoration-none">
-                    <img class="logo" src="{% static 'images/WPS_Logo (1).png' %}">
+                    <img class="logo" src="../static/images/WPS_Logo (1).png">
                 </a>
             </div>
             <div class="col-md-4 text-center">
                 <h1>Soccer App</h1>
             </div>
-            <div class="col-md-4 text-end">
+            <div class="col-md-4 text-md-end text-center">
                 <button type="button" class="add-game-button btn btn-primary">Add Game</button>
             </div>
         </div>
@@ -30,7 +30,7 @@
     <section class="card-container">
         {%for game in games_won%}
         <div class="card">
-            <img src="{% static 'images/victoryGreen.jpg' %}" class="card-img-top" alt="Victory">
+            <img src="../static/images/victoryGreen.jpg" class="card-img-top" alt="Victory">
             <div class="card-body">
                 <h4 class="card-title">{{game.title}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
@@ -44,7 +44,7 @@
         {%endfor%}
         {%for game in games_lost%}
         <div class="card">
-            <img src="{% static 'images/lossRed.jpeg' %}" class="card-img-top" alt="Victory">
+            <img src="../static/images/lossRed.jpeg" class="card-img-top" alt="Victory">
             <div class="card-body">
                 <h4 class="card-title">{{game.title}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->

@@ -4,9 +4,14 @@ body {
     background-color: #f4f4f4;
 }
 
-header {
+body, .container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+header{
     background-color: #42a4c4;
-    padding: 1rem 0;
+    padding: 1.5rem 1.5rem !important;
 }
 
 .container {
@@ -40,6 +45,8 @@ h1 {
     color: #ffffff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .add-game-button:hover {
