@@ -20,37 +20,40 @@
     </header>
 
     <section class="card-container">
-
+        {%for game in games_won%}
         <div class="card">
             <img src="../static/images/victoryGreen.jpg" class="card-img-top" alt="Victory">
             <div class="card-body">
                 <h4 class="card-title">{{game.title}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
                 <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal"
-                    data-bs-target="#gameModal1"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
+                    data-bs-target="#{{game.id}}"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
                     View More
                 </button>
                 <button type="button" class="editButton btn btn-secondary">Edit</button>
             </div>
         </div>
-
+        {%endfor%}
+        {%for game in games_lost%}
         <div class="card">
             <img src="../static/images/lossRed.jpeg" class="card-img-top" alt="Victory">
             <div class="card-body">
                 <h4 class="card-title">{{game.title}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
                 <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" 
-                    data-bs-target="#gameModal2"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
+                    data-bs-target="#{{game.id}}"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
                     View More
                 </button>
                 <button type="button" class="editButton btn btn-secondary">Edit</button>
             </div>
         </div>
+        {%endfor%}
     </section>
 
     <section>
         <!-- Modal That pops up -->
-        <div class="modal fade" id="gameModal1" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
+        {%for game in games_won%}
+        <div class="modal fade" id="{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
             <!-- The id = gameModal1 connects the modal to the sepcific card. Dynamic Shit -->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -78,9 +81,10 @@
                 </div>
             </div>
         </div>
-
+        {%endfor%}
+        {%for game in games_lost%}
         <!-- Modal That pops up -->
-        <div class="modal fade" id="gameModal2" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
+        <div class="modal fade" id="{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
             <!-- The id = gameModal2 connects the modal to the sepcific card. Dynamic Shit-->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -108,6 +112,7 @@
                 </div>
             </div>
         </div>
+        {%endfor%}
     </section>  
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

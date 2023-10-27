@@ -1,8 +1,7 @@
 from django import forms
-from .models import DashboardStats
-from .models import StatsPerGame
-from .models import Player
-from .models import CustomUser
+from .models import DashboardStats, StatsPerGame, Player
+from django.contrib.auth.models import User
+
 class DashboardStatsForm(forms.ModelForm):
     class Meta:
         model = DashboardStats
@@ -19,6 +18,8 @@ class PlayerForm(forms.ModelForm):
         fields = '__all__'
 
 class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
-        model = CustomUser
-        fields = '__all__'
+        model = User
+        fields = ['username', 'password']
+
