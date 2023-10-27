@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer App</title>
+    <link rel="stylesheet" href="../static/k.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <header class="header d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <div class="col-md-3 mb-2 mb-md-0">
+                    <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <img class="logo" src="../static/images/WPS_Logo (1).png" alt="Logo">
+                    </a>
+                </div>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 fs-3 fw-bold">
+                    <li>
+                        <h1>Soccer App</h1>
+                    </li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="add-game-button btn btn-primary">Add Game</button>
+                </div>
+            </header>
+        </div>
+    </header>
+
+    <section class="card-container">
+
+        <div class="card">
+            <img src="../static/images/victoryGreen.jpg" class="card-img-top" alt="Victory">
+            <div class="card-body">
+                <h4 class="card-title">Windermere Prep Vs Montverd</h4>
+                <p class="card-text">07/04/2023</p>
+                <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" data-bs-target="#gameModal1">View More</button>
+                <button type="button" class="editButton btn btn-secondary">Edit</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="../static/images/lossRed.jpeg" class="card-img-top" alt="Victory">
+            <div class="card-body">
+                <h4 class="card-title">Windermere Prep Vs LHP</h4>
+                <p class="card-text">07/04/2023</p>
+                <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" data-bs-target="#gameModal2">View More</button>
+                <button type="button" class="editButton btn btn-secondary">Edit</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <!-- Modal That pops up -->
+        <div class="modal fade" id="gameModal1" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="gameModalLabel1">Windermere Prep Vs Montverd</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Details inside Modal -->
+                        <p>Date: 07/04/2023</p>
+                        <p>Location: Soccer Field</p>
+                        <p>Time: 5:00 PM</p>
+                        <p>Total Goals: 50</p>
+                        <p>Assists: 10</p>
+                        <p>Completed Passes: 10</p>
+                        <p>Total Passes: 10</p>
+                        <p>Turn Overs: 10</p>
+                        <p>Saves: 10</p>
+                        <p>Clean Sheets: 10</p>
+                        <p>Issued Cards: 10</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal That pops up -->
+        <div class="modal fade" id="gameModal2" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="gameModalLabel1">Windermere Prep Vs LHP</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Details inside Modal -->
+                        <p>Date: 07/04/2023</p>
+                        <p>Location: Soccer Field</p>
+                        <p>Time: 5:00 PM</p>
+                        <p>Total Goals: 50</p>
+                        <p>Assists: 10</p>
+                        <p>Completed Passes: 10</p>
+                        <p>Total Passes: 10</p>
+                        <p>Turn Overs: 10</p>
+                        <p>Saves: 10</p>
+                        <p>Clean Sheets: 10</p>
+                        <p>Issued Cards: 10</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="../static/k.js"></script>
+</body>
+</html>
