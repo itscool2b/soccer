@@ -1,35 +1,51 @@
-.logo {
-    max-width: 80px; 
-    width: 100%;
-    height: auto;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
 }
 
 header {
-    background-color: rgb(66, 164, 196);
-    padding-right: 3vw;
-    padding-left: 1vw;
+    background-color: #42a4c4;
+    padding: 1rem 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    max-width: 80px;
+    width: 100%;
+    height: auto;
+    margin-right: 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .add-game-button {
     background-color: #5397dc;
-    border: none; 
+    border: none;
     border-radius: 5px;
     padding: 12px 25px;
     font-size: 18px;
     font-weight: bold;
     color: #ffffff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .add-game-button:hover {
     background-color: #3a8bc1;
     transform: translateY(-2px);
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
-}
-
-body {
-    font-family: Arial, sans-serif;
 }
 
 .card {
