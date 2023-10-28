@@ -10,21 +10,99 @@
 </head>
 <body>
 
-    <header class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-4">
-                <a href="/" class="d-inline-flex align-items-center link-body-emphasis text-decoration-none">
-                    <img class="logo" src="../static/images/WPS_Logo (1).png">
-                </a>
-            </div>
-            <div class="col-md-4 text-center">
-                <h1>Soccer App</h1>
-            </div>
-            <div class="col-md-4 text-md-end text-center">
-                <button type="button" class="add-game-button btn btn-primary">Add Game</button>
+    <header class="container-fluid flex-header">
+        <a href="/" class="link-body-emphasis text-decoration-none">
+            <img class="logo" src="../static/images/WPS_Logo (1).png">
+        </a>
+        
+        <h1>Soccer App</h1>
+        
+        <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem;" data-bs-toggle="modal" data-bs-target="#addGameModal1">
+            Add Game<!-- Dynamic, data-bs-target connects to modal id -->
+        </button>
+    </header>
+    
+
+    <section> <!-- This is where the modal for the add game form is -->
+        <div class="modal fade" id="addGameModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add a New Game</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action=""  method="post"> <!-- Form action links to Dynamic shit -->
+
+                            <div class="form-group"> <!-- Dynamic Shit  -->
+                                <label for="gameName">Game Name:</label>
+                                <input type="text" class="form-control" id="gameName" name="gameName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goals"> Goals:</label> <!-- Goals  -->
+                                <input type="text" class="form-control" id="goals" name="goals">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="assists"> Assists:</label> <!-- Assists  -->
+                                <input type="text" class="form-control" id="assists" name="Assists">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="completed_passes"> Completed Passes:</label> <!-- completedpasses  -->
+                                <input type="text" class="form-control" id="completed_passes" name="completed_passes">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="total_passes"> Total Passes:</label> <!-- totalpasses  -->
+                                <input type="text" class="form-control" id="total_passes" name="total_passes">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="turnovers"> Turn Overs:</label> <!-- turnovers  -->
+                                <input type="text" class="form-control" id="turnovers" name="turnovers">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="saves"> Saves:</label> <!-- saves  -->
+                                <input type="text" class="form-control" id="saves" name="saves">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="saves"> Saves:</label> <!-- saves  -->
+                                <input type="text" class="form-control" id="saves" name="saves">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clean_sheets"> Clean Sheets:</label> <!-- clean_sheets  -->
+                                <input type="text" class="form-control" id="clean_sheets" name="clean_sheets">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="issued_card"> Issued Card:</label> <!-- issued_card  -->
+                                <input type="text" class="form-control" id="issued_card" name="issued_card">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">  Date:</label> <!-- date  -->
+                                <input type="text" class="form-control" id="date" name="date">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="wl">  Win = True?</label> <!-- wl  -->
+                                <input type="text" class="form-control" id="wl" name="wl">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                        </form>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
     
 
     <section class="card-container">

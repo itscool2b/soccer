@@ -14,12 +14,20 @@ header{
     padding: 1.5rem 1.5rem !important;
 }
 
+.flex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;  
+}
+
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
+
 
 .logo {
     max-width: 80px;
