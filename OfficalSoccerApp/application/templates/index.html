@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soccer App</title>
+    
+    <title class="left-align">Soccer App</title>
+    
     <link rel="stylesheet" href="../static/k.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -89,6 +91,18 @@
                                 <label for="wl">  Win = True?</label> <!-- wl  -->
                                 <input type="text" class="form-control" id="wl" name="wl">
                             </div>
+                            <div class="form-group">
+                                <label for="assister">  assister</label> <!-- wl  -->
+                                <input type="text" class="form-control" id="assister" name="assister">
+                            </div>
+                            <div class="form-group">
+                                <label for="goalscorer">  goalscorer</label> <!-- wl  -->
+                                <input type="text" class="form-control" id="goalscorer" name="goalscorer">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardgiven">  cardgiven</label> <!-- wl  -->
+                                <input type="text" class="form-control" id="cardgiven" name="cardgiven">
+                            </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -123,7 +137,7 @@
                 <h4 class="card-title">{{game.vs}}</h4> <!-- Dynamic Shit -->
                 <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
                 <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" 
-                    data-bs-target="#{{game.id}}"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
+                    data-bs-target="#gameModal{{game.id}}"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
                     View More
                 </button>
                 <button type="button" class="editButton btn btn-secondary">Edit</button>
@@ -140,13 +154,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="gameModalLabel1">Windermere Prep Vs Montverd</h5>
+                        <h5 class="modal-title" id="gameModalLabel1">{{game.vs}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Details inside Modal Dynamic Shit -->
                         <p>Date: {{ game.date }}</p>
-<p>Opponent: {{ game.vs }}</p>
+<p>Game: {{ game.vs }}</p>
 <p>Goals: {{ game.goals }}</p>
 <p>Assists: {{ game.assists }}</p>
 <p>Completed Passes: {{ game.completed_passes }}</p>
@@ -171,13 +185,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="gameModalLabel1">Windermere Prep Vs LHP</h5>
+                        <h5 class="modal-title" id="gameModalLabel1">{{game.vs}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Details inside Modal - Dynamic Shit -->
                         <p>Date: {{ game.date }}</p>
-                        <p>Opponent: {{ game.vs }}</p>
+                        <p>Game: {{ game.vs }}</p>
                         <p>Goals: {{ game.goals }}</p>
                         <p>Assists: {{ game.assists }}</p>
                         <p>Completed Passes: {{ game.completed_passes }}</p>
