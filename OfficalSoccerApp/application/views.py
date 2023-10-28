@@ -75,3 +75,16 @@ def all_games(request):
     print('Games Won:', games_won)  # Add this line
     print('Games Lost:', games_lost)
     return render(request, 'index.html', {'games_won': games_won, 'games_lost': games_lost})
+
+@login_required
+def save_game(request):
+    if request.method == 'POST':
+        form = StatsPerGameForm(request.POST)
+        if form.is_valid():
+            game = form.save(commit=False)
+            game.user = request.user
+            game.save()
+            return redirect("dash")
+        else:
+            form = StatsPerGameForm()
+        return render(request, 'index.html', {'form': form})
