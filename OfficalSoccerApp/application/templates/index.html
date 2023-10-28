@@ -135,7 +135,7 @@
     <section>
         <!-- Modal That pops up -->
         {%for game in games_won%}
-        <div class="modal fade" id="#gameModal{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
+        <div class="modal fade" id="gameModal{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
             <!-- The id = gameModal1 connects the modal to the sepcific card. Dynamic Shit -->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -166,7 +166,7 @@
         {%endfor%}
         {%for game in games_lost%}
         <!-- Modal That pops up -->
-        <div class="modal fade" id="#gameModal{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
+        <div class="modal fade" id="gameModal{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
             <!-- The id = gameModal2 connects the modal to the sepcific card. Dynamic Shit-->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
