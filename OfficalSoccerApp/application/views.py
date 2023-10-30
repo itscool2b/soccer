@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import UserForm, DashboardStatsForm, StatsPerGameForm
-from .models import DashboardStats, StatsPerGame
+from .models import DashboardStats, StatsPerGame, Player
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.models import User
 
-
+from django.shortcuts import get_object_or_404
 
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -60,31 +60,40 @@ def stats_per_game_view(request):
             stats_per_game.user = request.user
             stats_per_game.save()
             messages.success(request, "Data saved successfully")
-            return redirect('dash')
+            
+            return redirect("dash")
         else:
             messages.error(request, "Invalid information. Please check the form")
     else:
         form = StatsPerGameForm()
-    return render(request, 'stats_per_game.html', {'form': form})
+    return render(request, 'index.html', {'form': form})
 
 # AllGames view
-@login_required
-def all_games(request):
-    games_won = StatsPerGame.objects.filter(wl=True, user=request.user)
-    games_lost = StatsPerGame.objects.filter(wl=False, user=request.user)
-    print('Games Won:', games_won)  # Add this line
-    print('Games Lost:', games_lost)
-    return render(request, 'index.html', {'games_won': games_won, 'games_lost': games_lost})
 
 @login_required
-def save_game(request):
+def dash(request):
+    players = Player.objects.all()
     if request.method == 'POST':
         form = StatsPerGameForm(request.POST)
         if form.is_valid():
             game = form.save(commit=False)
             game.user = request.user
+            assister_id = request.POST.get('assister')
+            if assister_id:
+                game.assister = get_object_or_404(Player, id=assister_id)
+
+            goalscorer_id = request.POST.get('goalscorer')
+            if goalscorer_id:
+                game.goalscorer = get_object_or_404(Player, id=goalscorer_id)
+
+            cardgiven_id = request.POST.get('cardgiven')
+            if cardgiven_id:
+                game.cardgiven = get_object_or_404(Player, id=cardgiven_id)
             game.save()
-            return redirect("dash")
-        else:
-            form = StatsPerGameForm()
-        return render(request, 'index.html', {'form': form})
+            messages.success(request,"nice")
+            return redirect('dash')
+    else:
+        StatsPerGameForm()
+    games_won = StatsPerGame.objects.filter(wl=True, user=request.user)
+    games_lost = StatsPerGame.objects.filter(wl=False, user=request.user)
+    return render(request, 'index.html', {'games_won': games_won, 'games_lost': games_lost, 'players': players})
