@@ -6,10 +6,11 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.models import User
-
+from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404
-
-
+from .models import PlayerGameStats
+from .forms import PlayerGameStatsForm, PlayerGameStatsFormset
+from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
 def user_login(request):
@@ -72,28 +73,45 @@ def stats_per_game_view(request):
 
 @login_required
 def dash(request):
-    players = Player.objects.all()
+    PlayerGameStatsFormset = forms.inlineformset_factory(StatsPerGame, PlayerGameStats, form=PlayerGameStatsForm, fields=('player', 'goals', 'assists', 'completed_passes', 'total_passes', 'turnovers', 'saves', 'clean_sheets', 'issued_card'), extra=5)
+    
     if request.method == 'POST':
         form = StatsPerGameForm(request.POST)
-        if form.is_valid():
+        formset = PlayerGameStatsFormset(request.POST, prefix='playergamestats')
+        
+        player_forms = []
+        for player in Player.objects.all():
+            player_form = PlayerGameStatsForm(request.POST, prefix=f'player_{player.id}', instance=PlayerGameStats.objects.get_or_create(player=player)[0])
+            player_forms.append((player, player_form))
+            
+            if player_form.is_valid():
+                player_form.save()
+        
+        if form.is_valid() and formset.is_valid():
             game = form.save(commit=False)
             game.user = request.user
-            assister_id = request.POST.get('assister')
-            if assister_id:
-                game.assister = get_object_or_404(Player, id=assister_id)
-
-            goalscorer_id = request.POST.get('goalscorer')
-            if goalscorer_id:
-                game.goalscorer = get_object_or_404(Player, id=goalscorer_id)
-
-            cardgiven_id = request.POST.get('cardgiven')
-            if cardgiven_id:
-                game.cardgiven = get_object_or_404(Player, id=cardgiven_id)
             game.save()
-            messages.success(request,"nice")
+            formset.instance = game
+            formset.save()
+            messages.success(request, "Data saved successfully")
             return redirect('dash')
     else:
-        StatsPerGameForm()
+        form = StatsPerGameForm()
+        formset = PlayerGameStatsFormset(prefix='playergamestats')
+        
+        player_forms = []
+        for player in Player.objects.all():
+            player_form = PlayerGameStatsForm(prefix=f'player_{player.id}', instance=PlayerGameStats.objects.get_or_create(player=player)[0])
+            player_forms.append((player, player_form))
+    
     games_won = StatsPerGame.objects.filter(wl=True, user=request.user)
     games_lost = StatsPerGame.objects.filter(wl=False, user=request.user)
-    return render(request, 'index.html', {'games_won': games_won, 'games_lost': games_lost, 'players': players})
+    
+    return render(request, 'index.html', {
+        'games_won': games_won,
+        'games_lost': games_lost,
+        'players': Player.objects.all(),
+        'form': form,
+        'playergamestats_formset': formset,
+        'player_forms': player_forms,
+    })

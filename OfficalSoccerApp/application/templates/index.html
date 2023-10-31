@@ -37,6 +37,17 @@
                         
                         <form action="{%url 'dash'%}"  method="post"> <!-- Form action links to Dynamic shit -->
                             {%csrf_token%}
+                            <div class="form-group">
+                                <label>Player Stats:</label>
+                                {% for player, form in player_forms %}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5>{{ player.name }}</h5>
+                                        {{ form.as_p }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
                             <div class="form-group"> <!-- Dynamic Shit  -->
                                 <label for="gameName">vs:</label>
                                 <input type="text" class="form-control" id="vs" name="vs">
@@ -94,36 +105,7 @@
                             
                     </div>
                     
-                    <div class="form-group">
-                        <label for="assister">Assisters:</label>
-                        <select multiple class="form-control" id="assister" name="assister">
-                            {% for player in players %}
-                                <option value="{{ player.id }}">{{ player.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
                     
-                    <div class="form-group">
-                        <label for="goalscorer">Goalscorers:</label>
-                        <select multiple class="form-control" id="goalscorer" name="goalscorer">
-                            {% for player in players %}
-                                <option value="{{ player.id }}">{{ player.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cardgiven">Card Given:</label>
-                        <select multiple class="form-control" id="cardgiven" name="cardgiven">
-                            {% for player in players %}
-                                <option value="{{ player.id }}">{{ player.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
                     
                         </form>
                 </div>
