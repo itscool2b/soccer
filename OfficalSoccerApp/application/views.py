@@ -19,7 +19,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('dash')
+            return redirect('stats')
     else:
         form = AuthenticationForm(request)
     return render(request, 'login-signup.html', {'form': form})
@@ -37,22 +37,22 @@ def user_logout(request):
 @require_http_methods(["GET", "POST"])
 def dash(request):
     if request.method == 'POST':
-        dstats = DashboardStatsForm(request.POST)
-        if dstats.is_valid():
-            form = dstats.save(commit=False)
-            form.user = request.user
-            form.save()
-            messages.success(request, "done")
+        form = DashboardStatsForm(request.POST)
+        if form.is_valid():
+            dashboard_stat = form.save(commit=False)
+            dashboard_stat.user = request.user
+            dashboard_stat.save()
+            messages.success(request, "Stats successfully saved.")
             return redirect('dash')
         else:
-            messages.error(request, "something went wrong")
-            form = DashboardStatsForm
-    all = DashboardStats.objects.all()
-    return render(request, "dash.html",{
+            messages.error(request, "Something went wrong. Please check the form and try again.")
+    else:
+        form = DashboardStatsForm()
+    
+    all_stats = DashboardStats.objects.all()
+    return render(request, "dash.html", {
         'form': form,
-        'all': all,
-        
-
+        'all_stats': all_stats,
     })
 
 @login_required
