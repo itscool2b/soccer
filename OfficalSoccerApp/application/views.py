@@ -35,44 +35,28 @@ def user_logout(request):
 # DashboardStats creation view
 @login_required
 @require_http_methods(["GET", "POST"])
-def dashboard_stats_view(request):
+def dash(request):
     if request.method == 'POST':
-        form = DashboardStatsForm(request.POST)
-        if form.is_valid():
-            temp = form.save(commit=False)
-            temp.user = request.user
-            temp.save()
-            messages.success(request, "Data saved successfully")
+        dstats = DashboardStatsForm(request.POST)
+        if dstats.is_valid():
+            form = dstats.save(commit=False)
+            form.user = request.user
+            form.save()
+            messages.success(request, "done")
             return redirect('dash')
         else:
-            messages.error(request, "Invalid information. Please check the form")
-    else:
-        form = DashboardStatsForm()
-    return render(request, 'dashboard_stats.html', {'form': form})
+            messages.error(request, "something went wrong")
+            form = DashboardStatsForm
+    all = DashboardStats.objects.all()
+    return render(request, "dash.html",{
+        'form': form,
+        'all': all,
+        
 
-# StatsPerGame creation view
-@login_required
-@require_http_methods(["GET", "POST"])
-def stats_per_game_view(request):
-    if request.method == 'POST':
-        form = StatsPerGameForm(request.POST)
-        if form.is_valid():
-            stats_per_game = form.save(commit=False)
-            stats_per_game.user = request.user
-            stats_per_game.save()
-            messages.success(request, "Data saved successfully")
-            
-            return redirect("dash")
-        else:
-            messages.error(request, "Invalid information. Please check the form")
-    else:
-        form = StatsPerGameForm()
-    return render(request, 'index.html', {'form': form})
-
-# AllGames view
+    })
 
 @login_required
-def dash(request):
+def statspergame(request):
     PlayerGameStatsFormset = forms.inlineformset_factory(StatsPerGame, PlayerGameStats, form=PlayerGameStatsForm, fields=('player', 'goals', 'assists', 'completed_passes', 'total_passes', 'turnovers', 'saves', 'clean_sheets', 'issued_card'), extra=5)
     
     if request.method == 'POST':
@@ -94,7 +78,7 @@ def dash(request):
             formset.instance = game
             formset.save()
             messages.success(request, "Data saved successfully")
-            return redirect('dash')
+            return redirect('stats')
     else:
         form = StatsPerGameForm()
         formset = PlayerGameStatsFormset(prefix='playergamestats')
