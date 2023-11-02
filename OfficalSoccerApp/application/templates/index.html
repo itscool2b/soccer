@@ -19,9 +19,19 @@
         
         <h1>Soccer App</h1>
         
-        <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem;" data-bs-toggle="modal" data-bs-target="#addGameModal1">
-            Add Game<!-- Dynamic, data-bs-target connects to modal id -->
-        </button>
+        <div>
+            <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem;" data-bs-toggle="modal" data-bs-target="#addGameModal1">
+                Add Game<!-- Dynamic, data-bs-target connects to modal id -->
+            </button>
+
+            <a href="{%url 'dash'%}">
+                <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
+                    Dashboard
+                </button>
+            </a>
+        
+        </div>
+    
     </header>
     
 

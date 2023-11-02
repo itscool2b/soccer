@@ -14,7 +14,6 @@ class DashboardStats(models.Model):
     total_red_cards = models.IntegerField()
     total_blue_cards = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField()
 class Player(models.Model):
     name = models.CharField(max_length=100, null=False, blank=True, default='Unknown') # Making sure each player has a unique name
 
