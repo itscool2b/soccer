@@ -17,7 +17,7 @@
         <h1>Soccer App</h1>
         
         <div>
-            <a href="index.html"> <!-- Dynamic Data Links back to card page-->
+            <a href="{%url 'stats'%}"> <!-- Dynamic Data Links back to card page-->
                 <button type="button" class="btn btn-primary px-3 d-block" style="width: 100%; max-width: 200px; padding-left: 1rem; padding-right: 1rem;" >
                     All Stats 
                 </button>
@@ -133,36 +133,38 @@
 
     <section class="p-4">
         <table class="table table-hover table-responsive-md">
+            {%for stats in all_stats%}
             <tbody>
                 <tr>
                     <th scope="row">Total Goals</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_goals}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Total Saves</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.wins}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Total Assists</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_assists}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Total Clean Sheets</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_clean_sheets}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Totaal Yellow cards</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_yellow_cards}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Total Red Cards</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_red_cards}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Total Blue Cards</th>
-                    <td>100</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_blue_cards}}</td> <!-- Dynamic Data -->
                 </tr>
             </tbody>
+            {%endfor%}
         </table>
     </section>
     

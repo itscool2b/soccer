@@ -36,6 +36,7 @@ def user_logout(request):
 @login_required
 @require_http_methods(["GET", "POST"])
 def dash(request):
+
     if request.method == 'POST':
         form = DashboardStatsForm(request.POST)
         if form.is_valid():
