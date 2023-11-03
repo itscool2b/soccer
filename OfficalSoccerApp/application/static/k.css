@@ -10,7 +10,7 @@ body, .container-fluid {
 }
 
 header{
-    background-color: #42a4c4;
+    background-color: #0f4c81;
     padding: 1.5rem 1.5rem !important;
 }
 
@@ -19,6 +19,16 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;  
+}
+
+.flex-header {
+    background-color: #0f4c81;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+.btn-primary {
+    background-color: #0077b6;
 }
 
 .container {

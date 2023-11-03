@@ -1,0 +1,41 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f6fa;
+        }
+
+        .flex-header {
+            background-color: #0f4c81;
+            color: #ffffff;
+            padding: 10px 0;
+        }
+
+        .btn-primary {
+            background-color: #0077b6;
+        }
+
+        #featured-3 {
+            background-color: #ffffff;
+            padding: 20px 0;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 10px auto;
+        }
+
+        h2 {
+            color: #0f4c81;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .fs-2, th {
+            color: #0f4c81;
+        }
+
+        th, td {
+            padding: 10px 0;
+        }
+
+
