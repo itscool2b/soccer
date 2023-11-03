@@ -75,62 +75,11 @@
                     </div>
                     <div class="modal-body">
                         
-                        <form action="{%url 'stats'%}"  method="post"> <!-- Form action links to Dynamic shit -->
+                        <form action="{%url 'dash'%}"  method="post"> <!-- Form action links to Dynamic shit -->
                             {%csrf_token%}
 
-                            <div class="games_played"> <!-- Dynamic Shit  -->
-                                <label for="games_played">Games Played:</label>
-                                <input type="text" class="form-control" id="games_played" name="games_played">
-                            </div>
-
-                            <div class="wins"> <!-- Dynamic Shit  -->
-                                <label for="wins">Games Won: </label>
-                                <input type="text" class="form-control" id="wins" name="wins">
-                            </div>
-
-                            <div class="total_goals"> <!-- Dynamic Shit  -->
-                                <label for="total_goals">Total Goals: </label>
-                                <input type="text" class="form-control" id="total_goals" name="total_goals">
-                            </div>
-
-                            <div class="total_saves"> <!-- Dynamic Shit  -->
-                                <label for="total_saves">Total Saves: </label>
-                                <input type="text" class="form-control" id="total_saves" name="total_saves">
-                            </div>
-
-                            <div class="total_assists"> <!-- Dynamic Shit  -->
-                                <label for="total_assists">Total Assists: </label>
-                                <input type="text" class="form-control" id="total_assists" name="total_assists">
-                            </div>
-
-                            <div class="total_clean_sheets"> <!-- Dynamic Shit  -->
-                                <label for="total_clean_sheets">Total Clean Sheets: </label>
-                                <input type="text" class="form-control" id="total_clean_sheets" name="total_clean_sheets">
-                            </div>
-
-                            <div class="total_yellow_cards"> <!-- Dynamic Shit  -->
-                                <label for="total_yellow_cards">Total Yellow Cards: </label>
-                                <input type="text" class="form-control" id="total_yellow_cards" name="total_yellow_cards">
-                            </div>
-
-                            <div class="total_red_cards"> <!-- Dynamic Shit  -->
-                                <label for="total_red_cards">Total Red Cards: </label>
-                                <input type="text" class="form-control" id="total_red_cards" name="total_red_cards">
-                            </div>
-
-                            <div class="total_blue_cards"> <!-- Dynamic Shit  -->
-                                <label for="total_blue_cards">Total Blue Cards: </label>
-                                <input type="text" class="form-control" id="total_blue_cards" name="total_blue_cards">
-                            </div>
-
+                            {{ form.as_p }}
                             <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                
-                            
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="p-4">

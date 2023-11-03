@@ -34,7 +34,6 @@ def user_logout(request):
 
 # DashboardStats creation view
 @login_required
-@require_http_methods(["GET", "POST"])
 def dash(request):
 
     if request.method == 'POST':
@@ -44,13 +43,17 @@ def dash(request):
             dashboard_stat.user = request.user
             dashboard_stat.save()
             messages.success(request, "Stats successfully saved.")
+            print("Stats saved for user:", request.user.username)  # Printing to console
             return redirect('dash')
         else:
+            print("Form errors:", form.errors)  # Print form errors if not valid
             messages.error(request, "Something went wrong. Please check the form and try again.")
     else:
         form = DashboardStatsForm()
     
     all_stats = DashboardStats.objects.all()
+    print("All Stats:", all_stats)  # Print all_stats queryset to console
+
     return render(request, "dash.html", {
         'form': form,
         'all_stats': all_stats,
