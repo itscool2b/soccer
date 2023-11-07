@@ -45,82 +45,11 @@
                     </div>
                     <div class="modal-body">
                         
-                        <form action="{%url 'stats'%}"  method="post"> <!-- Form action links to Dynamic shit -->
+                        <form action="{%url 'home'%}"  method="post"> <!-- Form action links to Dynamic shit -->
                             {%csrf_token%}
                             <div class="form-group">
-                                <label>Player Stats:</label>
-                                {% for player, form in player_forms %}
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5>{{ player.name }}</h5>
-                                        {{ form.as_p }}
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <div class="form-group"> <!-- Dynamic Shit  -->
-                                <label for="gameName">vs:</label>
-                                <input type="text" class="form-control" id="vs" name="vs">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="goals"> Goals:</label> <!-- Goals  -->
-                                <input type="text" class="form-control" id="goals" name="goals">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="assists"> Assists:</label> <!-- Assists  -->
-                                <input type="text" class="form-control" id="assists" name="Assists">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="completed_passes"> Completed Passes:</label> <!-- completedpasses  -->
-                                <input type="text" class="form-control" id="completed_passes" name="completed_passes">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="total_passes"> Total Passes:</label> <!-- totalpasses  -->
-                                <input type="text" class="form-control" id="total_passes" name="total_passes">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="turnovers"> Turn Overs:</label> <!-- turnovers  -->
-                                <input type="text" class="form-control" id="turnovers" name="turnovers">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="saves"> Saves:</label> <!-- saves  -->
-                                <input type="text" class="form-control" id="saves" name="saves">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="clean_sheets"> Clean Sheets:</label> <!-- clean_sheets  -->
-                                <input type="text" class="form-control" id="clean_sheets" name="clean_sheets">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="issued_card"> Issued Card:</label> <!-- issued_card  -->
-                                <input type="text" class="form-control" id="issued_card" name="issued_card">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date">  Date:</label> <!-- date  -->
-                                <input type="text" class="form-control" id="date" name="date">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="wl">  Win = True?</label> <!-- wl  -->
-                                <input type="text" class="form-control" id="wl" name="wl">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-
-                        </form>
-                            
-                    </div>
-                
-                </div>
-            </div>
-        </div>
+                              {{form.as_p}}
+                              <input type="submit" value="Submit">
     </section>
     
 

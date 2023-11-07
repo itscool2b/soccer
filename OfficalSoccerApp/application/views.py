@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserForm, DashboardStatsForm, StatsPerGameForm
-from .models import DashboardStats, StatsPerGame, Player
+from .models import DashboardStats, StatsPerGame 
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -8,10 +8,21 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.models import User
 from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404
-from .models import PlayerGameStats
-from .forms import PlayerGameStatsForm, PlayerGameStatsFormset
+from .models import PlayerGameStats, Player
+from .forms import PlayerGameStatsForm, PlayerForm
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponseRedirect
+
+def update_player_stats(user, form_data):
+    """
+    This function updates the stats of a player.
+    """
+    player_stats, _ = PlayerGameStats.objects.update_or_create(
+        user=user,
+        defaults=form_data
+    )
+    return player_stats
 
 def user_login(request):
     if request.method == 'POST':
@@ -19,7 +30,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('stats')
+            return redirect('home')
     else:
         form = AuthenticationForm(request)
     return render(request, 'login-signup.html', {'form': form})
@@ -59,47 +70,47 @@ def dash(request):
         'all_stats': all_stats,
     })
 
+
+
+
 @login_required
-def statspergame(request):
-    PlayerGameStatsFormset = forms.inlineformset_factory(StatsPerGame, PlayerGameStats, form=PlayerGameStatsForm, fields=('player', 'goals', 'assists', 'completed_passes', 'total_passes', 'turnovers', 'saves', 'clean_sheets', 'issued_card'), extra=5)
-    
+def player_create_view(request):
     if request.method == 'POST':
-        form = StatsPerGameForm(request.POST)
-        formset = PlayerGameStatsFormset(request.POST, prefix='playergamestats')
-        
-        player_forms = []
-        for player in Player.objects.all():
-            player_form = PlayerGameStatsForm(request.POST, prefix=f'player_{player.id}', instance=PlayerGameStats.objects.get_or_create(player=player)[0])
-            player_forms.append((player, player_form))
-            
-            if player_form.is_valid():
-                player_form.save()
-        
-        if form.is_valid() and formset.is_valid():
-            game = form.save(commit=False)
-            game.user = request.user
-            game.save()
-            formset.instance = game
-            formset.save()
-            messages.success(request, "Data saved successfully")
-            return redirect('stats')
+        form = PlayerForm(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.user = request.user
+            player.save()
+            messages.success(request, "Player created successfully.")
+            return redirect('home')
     else:
-        form = StatsPerGameForm()
-        formset = PlayerGameStatsFormset(prefix='playergamestats')
-        
-        player_forms = []
-        for player in Player.objects.all():
-            player_form = PlayerGameStatsForm(prefix=f'player_{player.id}', instance=PlayerGameStats.objects.get_or_create(player=player)[0])
-            player_forms.append((player, player_form))
-    
-    games_won = StatsPerGame.objects.filter(wl=True, user=request.user)
-    games_lost = StatsPerGame.objects.filter(wl=False, user=request.user)
-    
+        form = PlayerForm()
+    return redirect('home')
+
+@login_required
+def home(request):
+    games_lost = StatsPerGame.objects.filter(wl=False)
+    games_won = StatsPerGame.objects.filter(wl=True)
+
     return render(request, 'index.html', {
-        'games_won': games_won,
-        'games_lost': games_lost,
-        'players': Player.objects.all(),
-        'form': form,
-        'playergamestats_formset': formset,
-        'player_forms': player_forms,
+        "games_lost":games_lost,
+        "games_won": games_won
     })
+
+@login_required
+def updateplayerstats(request):
+    if request.method == 'POST':
+        form = PlayerGameStatsForm(request.POST)
+        if form.is_valid():
+            
+            update_player_stats(request.user, form.cleaned_data)
+            messages.success(request, "Player stats updated successfully.")
+            return redirect('home')  
+        else:
+            messages.error(request, "There was an error updating the player stats.")
+    else:
+        
+        player_stats_instance = PlayerGameStats.objects.filter(user=request.user).first()
+        form = PlayerGameStatsForm(instance=player_stats_instance)
+    
+    return redirect('home')

@@ -14,11 +14,10 @@ class DashboardStats(models.Model):
     total_red_cards = models.IntegerField()
     total_blue_cards = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-class Player(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=True, default='Unknown') # Making sure each player has a unique name
 
-    def __str__(self):
-        return self.name
+class Player(models.Model):
+    name = models.CharField(max_length=100)
+
 
 class StatsPerGame(models.Model):
     vs = models.CharField(max_length=100, blank=True, null=True)
@@ -39,7 +38,6 @@ class StatsPerGame(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     shutouts = models.ForeignKey('Player', on_delete=models.SET_NULL, related_name='shutouts_games', null=True, blank=True)
     savers = models.ForeignKey('Player', on_delete=models.SET_NULL, related_name='saves_games', null=True, blank=True)
-    players = models.ManyToManyField(Player, through='PlayerGameStats')
 
 class PlayerGameStats(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
@@ -51,4 +49,6 @@ class PlayerGameStats(models.Model):
     turnovers = models.IntegerField(default=0)
     saves = models.IntegerField(default=0)
     clean_sheets = models.IntegerField(default=0)
-    issued_card = models.CharField(max_length=100, blank=True)
+    yellow_cards = models.IntegerField(default=0)
+    red_cards = models.IntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
