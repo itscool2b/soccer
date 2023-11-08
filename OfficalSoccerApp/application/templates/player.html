@@ -21,13 +21,13 @@
                 Add Player<!-- Dynamic, data-bs-target connects to modal id -->
             </button>
 
-            <a href="{}">
+            <a href="{%url 'dash'%}">
                 <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
                     Dashboard <!-- Link it to the Dashboard  -->
                 </button>
             </a>
 
-            <a href="{}">
+            <a href="{%url 'home'%}">
                 <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
                     Home <!-- Link it to the Homepage  -->
                 </button>
@@ -45,12 +45,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{}" method="post">
+                            <form action="{%url 'playerform'%}" method="post">
                                 {% csrf_token %}
 
                                 <div class="form-group">
                                     <label for="player"> Player:</label> <!-- player  -->
-                                    <input type="text" class="form-control" id="player" name="player">
+                                    <input type="text" class="form-control" id="player.name" name="player">
                                 </div>
                                 
                                 <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 1rem;">
@@ -61,18 +61,7 @@
             </div>
         </section>
 
-        <div class="container">
-            <section> <!-- Card for each player -->
-                <div class="card" style="width: 18rem;">
-                    <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title">Arcoon</h5> <!-- Player Name, add dynamic Shit -->
-                        <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal">
-                        View More <!-- Data bs target connects to modal id -->
-                        </button>
-                    </div>
-                </div>
-            </section>
+        
 
             <section> <!-- Card for each player -->
                 <div class="card" style="width: 18rem;">
@@ -85,19 +74,7 @@
                     </div>
                 </div>
             </section>
-
-            <section> <!-- Card for each player -->
-                <div class="card" style="width: 18rem;">
-                    <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title">Arcoon</h5> <!-- Player Name, add dynamic Shit -->
-                        <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal">
-                        View More <!-- Data bs target connects to modal id -->
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </div>
+      
 
         <section> <!-- Modal for each player -->
             <div class="modal fade" id="playerInfoModal" tabindex="-1" aria-labelledby="playerInfoModalLabel" aria-hidden="true">

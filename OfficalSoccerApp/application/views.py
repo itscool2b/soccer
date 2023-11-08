@@ -14,6 +14,26 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 
+def playerform(request):
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        if form.is_valid():
+            yes = form.save(commit=False)
+            yes.user = request.user
+            yes.save()
+            messages.SUCCESS(request, "YAY")
+            return redirect('playerhome')
+        else:
+            form = PlayerForm()
+            messages.error(request, "something went wrong")
+            return redirect('playerhome')
+        
+def playerhome(request):
+    players = Player.objects.all()
+    return render(request, 'player.html', {
+        'players': players
+    })
+
 def update_player_stats(user, form_data):
     """
     This function updates the stats of a player.

@@ -17,7 +17,7 @@ class DashboardStats(models.Model):
 
 class Player(models.Model):
     name = models.CharField(max_length=100)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class StatsPerGame(models.Model):
     vs = models.CharField(max_length=100, blank=True, null=True)
@@ -51,4 +51,4 @@ class PlayerGameStats(models.Model):
     clean_sheets = models.IntegerField(default=0)
     yellow_cards = models.IntegerField(default=0)
     red_cards = models.IntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    
