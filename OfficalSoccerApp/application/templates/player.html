@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats</title>
+    <link rel="stylesheet" href="../static/k.css">
+    <link rel="stylesheet" href="../static/player.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <header class="container-fluid flex-header">
+        <a href="/" class="link-body-emphasis text-decoration-none">
+            <img class="logo" src="../static/images/WPS_Logo (1).png">
+        </a>
+        
+        <h1>Soccer App</h1>
+        
+        <div>
+            <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#addPlayerModal" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 1rem;">
+                Add Player<!-- Dynamic, data-bs-target connects to modal id -->
+            </button>
+
+            <a href="{}">
+                <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
+                    Dashboard <!-- Link it to the Dashboard  -->
+                </button>
+            </a>
+
+            <a href="{}">
+                <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
+                    Home <!-- Link it to the Homepage  -->
+                </button>
+            </a>
+        </div>
+    
+    </header>
+
+        <section> <!-- This is where the modal for the add player form is -->
+            <div class="modal fade" id="addPlayerModal" tabindex="-1" role="dialog" aria-labelledby="addPlayerModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addPlayerModalLabel">Add a New Player</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{}" method="post">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="player"> Player:</label> <!-- player  -->
+                                    <input type="text" class="form-control" id="player" name="player">
+                                </div>
+                                
+                                <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 1rem;">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section> <!-- Card for each player -->
+                <div class="card" style="width: 18rem;">
+                    <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">Arcoon</h5> <!-- Player Name, add dynamic Shit -->
+                        <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal">
+                        View More <!-- Data bs target connects to modal id -->
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section> <!-- Card for each player -->
+                <div class="card" style="width: 18rem;">
+                    <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">Arcoon</h5> <!-- Player Name, add dynamic Shit -->
+                        <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal">
+                        View More <!-- Data bs target connects to modal id -->
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section> <!-- Card for each player -->
+                <div class="card" style="width: 18rem;">
+                    <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">Arcoon</h5> <!-- Player Name, add dynamic Shit -->
+                        <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal">
+                        View More <!-- Data bs target connects to modal id -->
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section> <!-- Modal for each player -->
+            <div class="modal fade" id="playerInfoModal" tabindex="-1" aria-labelledby="playerInfoModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="playerInfoModalLabel">Player Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <!-- Player info here -->
+                    <p>Name: Arcoon</p>
+                    <p>Position: Forward</p>
+                    <p>Number: 9</p>
+                    <p>Team: The Wildcats</p>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="../static/k.js"></script>
+    
+</body>
+</html>

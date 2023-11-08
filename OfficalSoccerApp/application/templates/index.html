@@ -24,10 +24,11 @@
                 Add Game<!-- Dynamic, data-bs-target connects to modal id -->
             </button>
 
-            <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#addPlayerModal" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 1rem;">
-                Add Player<!-- Dynamic, data-bs-target connects to modal id -->
-            </button>
-            
+            <a href="./player.html">
+                <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
+                    Player Stats
+                </button>
+            </a>
 
             <a href="{%url 'dash'%}">
                 <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
@@ -37,28 +38,6 @@
         </div>
     
     </header>
-
-    <section> <!-- This is where the modal for the add player form is -->
-        <div class="modal fade" id="addPlayerModal" tabindex="-1" role="dialog" aria-labelledby="addPlayerModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addPlayerModalLabel">Add a New Player</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{}" method="post">
-                            {% csrf_token %}
-                            
-                            <input type="submit" value="Submit" class="btn btn-primary">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </section>
-    
 
     <section> <!-- This is where the modal for the add game form is -->
         <div class="modal fade" id="addGameModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
