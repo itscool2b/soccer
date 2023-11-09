@@ -21,7 +21,7 @@ def playerform(request):
             yes = form.save(commit=False)
             yes.user = request.user
             yes.save()
-            messages.SUCCESS(request, "YAY")
+            messages.success(request, "YAY")
             return redirect('playerhome')
         else:
             form = PlayerForm()
@@ -29,7 +29,7 @@ def playerform(request):
             return redirect('playerhome')
         
 def playerhome(request):
-    players = Player.objects.all()
+    players = Player.objects.prefetch_related('playerstats')
     return render(request, 'player.html', {
         'players': players
     })
@@ -134,3 +134,18 @@ def updateplayerstats(request):
         form = PlayerGameStatsForm(instance=player_stats_instance)
     
     return redirect('home')
+
+
+def statsform(request):
+    if request.method == 'POST':
+        form = StatsPerGameForm(request.POST)
+        if form.is_valid():
+            form2 = form.save(commit=False)
+            form2.user = request.user
+            form2.save()
+            messages.success(request, "amazing")
+            return redirect('home')
+        else:
+            messages.error(request, "something went wrong")
+            return redirect('home')
+            

@@ -40,7 +40,7 @@ class StatsPerGame(models.Model):
     savers = models.ForeignKey('Player', on_delete=models.SET_NULL, related_name='saves_games', null=True, blank=True)
 
 class PlayerGameStats(models.Model):
-    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    player = models.OneToOneField(Player, on_delete=models.CASCADE)
     game = models.ForeignKey(StatsPerGame, on_delete=models.CASCADE)
     goals = models.IntegerField(default=0)
     assists = models.IntegerField(default=0)

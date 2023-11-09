@@ -45,7 +45,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{%url 'playerform'%}" method="post">
+                            <form action="{%url 'create'%}" method="post">
                                 {% csrf_token %}
 
                                 <div class="form-group">
@@ -62,43 +62,45 @@
         </section>
 
         
-
-            <section> <!-- Card for each player -->
-                <div class="card" style="width: 18rem;">
-                    <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title">Arcoon</h5> <!-- Player Name, add dynamic Shit -->
-                        <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal">
-                        View More <!-- Data bs target connects to modal id -->
-                        </button>
-                    </div>
-                </div>
-            </section>
-      
-
-        <section> <!-- Modal for each player -->
-            <div class="modal fade" id="playerInfoModal" tabindex="-1" aria-labelledby="playerInfoModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="playerInfoModalLabel">Player Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <!-- Player info here -->
-                    <p>Name: Arcoon</p>
-                    <p>Position: Forward</p>
-                    <p>Number: 9</p>
-                    <p>Team: The Wildcats</p>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
+        {% for player in players %}
+        <section>
+            <div class="card" style="width: 18rem;">
+                <img class="custom-img-height" src="../static/images/Arcoon.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ player.name }}</h5>
+                    <button href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerInfoModal{{ player.id }}">
+                    View More
+                    </button>
                 </div>
             </div>
         </section>
     
+        <!-- Modal for each player -->
+        <div class="modal fade" id="playerInfoModal{{ player.id }}" tabindex="-1" aria-labelledby="playerInfoModalLabel{{ player.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="playerInfoModalLabel{{ player.id }}">Player Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <p>Goals: {{ player.playerstats.goals }}</p>
+                    <p>Assists: {{ player.playerstats.assists }}</p>
+                    <p>Completed Passes: {{ player.playerstats.completed_passes }}</p>
+                    <p>Total Passes: {{ player.playerstats.total_passes }}</p>
+                    <p>Turnovers: {{ player.playerstats.turnovers }}</p>
+                    <p>Saves: {{ player.playerstats.saves }}</p>
+                    <p>Clean Sheets: {{ player.playerstats.clean_sheets }}</p>
+                    <p>Yellow Cards: {{ player.playerstats.yellow_cards }}</p>
+                    <p>Red Cards: {{ player.playerstats.red_cards }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 
 
 
