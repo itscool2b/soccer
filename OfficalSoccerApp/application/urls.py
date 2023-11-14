@@ -3,9 +3,10 @@ from . import views
 
 urlpatterns = [
     path("", views.user_login, name="login"),
-    path("createplayer/", views.player_create_view, name="createplayer"),
+    path("logout/", views.user_logout, name="logout"),
+    path("dashboard/", views.dash, name='dash'),
     path("home/", views.home, name='home'),
-    path("dash/", views.dash, name='dash'),
-    path("playerstats/", views.playerhome, name="playerhome"),
-    path("create/", views.playerform, name="playerform")
+    path("add_game/", views.add_game, name='add_game'),
+    path("player/", views.player_create_view, name="createplayer"),
+    path("playerhome/", views.playerhome, name='playerhome')
 ]

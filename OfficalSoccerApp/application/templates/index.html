@@ -1,4 +1,4 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +24,13 @@
                 Add Game<!-- Dynamic, data-bs-target connects to modal id -->
             </button>
 
-            <a href="{%url 'playerhome'%}">
+            <a href="{% url 'playerhome' %}">
                 <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
                     Player Stats
                 </button>
             </a>
 
-            <a href="{%url 'dash'%}">
+            <a href="{% url 'dash' %}">
                 <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
                     Dashboard
                 </button>
@@ -39,7 +39,8 @@
     
     </header>
 
-    <section> <!-- This is where the modal for the add game form is -->
+    <!-- Modal for Adding a Game -->
+    <section>
         <div class="modal fade" id="addGameModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -48,16 +49,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
-                        <form action="{%url 'home'%}"  method="post"> <!-- Form action links to Dynamic shit -->
-                            {%csrf_token%}
+                        <form action="{% url 'add_game' %}" method="post"> <!-- Updated form action -->
+                            {% csrf_token %}
+                            {{ game_form.as_p }} <!-- StatsPerGameForm fields -->
+                            {{ player_stats_formset.management_form }} <!-- PlayerGameStatsFormset fields -->
+                            {% for form in player_stats_formset %}
+                                {{ form.as_p }}
+                            {% endfor %}
                             <div class="form-group">
-                                <label for="player"> Player:</label> <!-- player  -->
-                                <input type="text" class="form-control" id="player" name="player">
-                            </div>
-
-                            <div class="form-group">
-                              <input type="submit" value="Submit">
+                              <input type="submit" value="Submit" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -65,104 +65,78 @@
             </div>
         </div>
     </section>
-    
 
+    <!-- Card View for Games -->
     <section class="card-container">
-        {%for game in games_won%}
+        {% for game in games_won %}
         <div class="card">
             <img src="{% static 'images/victoryGreen.jpg' %}" class="card-img-top" alt="Victory">
             <div class="card-body">
-                <h4 class="card-title">{{game.vs}}</h4> <!-- Dynamic Shit -->
-                <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
-                <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal"
-                    data-bs-target="#gameModal{{game.id}}"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
-                    View More
-                </button>
+                <h4 class="card-title">{{ game.vs }}</h4>
+                <p class="card-text">{{ game.date }}</p>
+                <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" data-bs-target="#gameModal{{ game.id }}">View More</button>
                 <button type="button" class="editButton btn btn-secondary">Edit</button>
             </div>
         </div>
-        {%endfor%}
-        {%for game in games_lost%}
+        {% endfor %}
+        {% for game in games_lost %}
         <div class="card">
-            <img src="{% static 'images/lossRed.jpeg' %}" class="card-img-top" alt="Victory">
+            <img src="{% static 'images/lossRed.jpeg' %}" class="card-img-top" alt="Defeat">
             <div class="card-body">
-                <h4 class="card-title">{{game.vs}}</h4> <!-- Dynamic Shit -->
-                <p class="card-text">07/04/2023</p> <!-- Dynamic Shit -->
-                <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" 
-                    data-bs-target="#gameModal{{game.id}}"> <!-- data-bs-target links to modal that pops up. Dynamic Shit -->
-                    View More
-                </button>
+                <h4 class="card-title">{{ game.vs }}</h4>
+                <p class="card-text">{{ game.date }}</p>
+                <button type="button" class="editButton btn btn-secondary" data-bs-toggle="modal" data-bs-target="#gameModal{{ game.id }}">View More</button>
                 <button type="button" class="editButton btn btn-secondary">Edit</button>
             </div>
         </div>
-        {%endfor%}
+        {% endfor %}
     </section>
 
-    <section>
-        <!-- Modal That pops up -->
-        {%for game in games_won%}
-        <div class="modal fade" id="gameModal{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
-            <!-- The id = gameModal1 connects the modal to the sepcific card. Dynamic Shit -->
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="gameModalLabel1">{{game.vs}}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Details inside Modal Dynamic Shit -->
-                        <p>Date: {{ game.date }}</p>
-                        <p>Game: {{ game.vs }}</p>
-                        <p>Goals: {{ game.goals }}</p>
-                        <p>Assists: {{ game.assists }}</p>
-                        <p>Completed Passes: {{ game.completed_passes }}</p>
-                        <p>Total Passes: {{ game.total_passes }}</p>
-                        <p>Turnovers: {{ game.turnovers }}</p>
-                        <p>Saves: {{ game.saves }}</p>
-                        <p>Clean Sheets: {{ game.clean_sheets }}</p>
-                        <p>Issued Cards: {{ game.issued_card }}</p>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+    <!-- Modals for Viewing Game Details -->
+    {% for game in games_won %}
+    <div class="modal fade" id="gameModal{{ game.id }}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel{{ game.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gameModalLabel{{ game.id }}">{{ game.vs }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Date: {{ game.date }}</p>
+                    {% for player_stat in game.playergamestats_set.all %}
+                        <p>{{ player_stat.player.name }} - Goals: {{ player_stat.goals }}, Assists: {{ player_stat.assists }}</p>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        {%endfor%}
-        {%for game in games_lost%}
-        <!-- Modal That pops up -->
-        <div class="modal fade" id="gameModal{{game.id}}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel1" aria-hidden="true">
-            <!-- The id = gameModal2 connects the modal to the sepcific card. Dynamic Shit-->
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="gameModalLabel1">{{game.vs}}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Details inside Modal - Dynamic Shit -->
-                        <p>Date: {{ game.date }}</p>
-                        <p>Game: {{ game.vs }}</p>
-                        <p>Goals: {{ game.goals }}</p>
-                        <p>Assists: {{ game.assists }}</p>
-                        <p>Completed Passes: {{ game.completed_passes }}</p>
-                        <p>Total Passes: {{ game.total_passes }}</p>
-                        <p>Turnovers: {{ game.turnovers }}</p>
-                        <p>Saves: {{ game.saves }}</p>
-                        <p>Clean Sheets: {{ game.clean_sheets }}</p>
-                        <p>Issued Cards: {{ game.issued_card }}</p>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+    </div>
+    {% endfor %}
+    {% for game in games_lost %}
+    <div class="modal fade" id="gameModal{{ game.id }}" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel{{ game.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gameModalLabel{{ game.id }}">{{ game.vs }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Date: {{ game.date }}</p>
+                    {% for player_stat in game.playergamestats_set.all %}
+                        <p>{{ player_stat.player.name }} - Goals: {{ player_stat.goals }}, Assists: {{ player_stat.assists }}</p>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        {%endfor%}
-    </section>  
+    </div>
+    {% endfor %}
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="../static/k.js"></script>
