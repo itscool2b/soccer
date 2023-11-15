@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models import Sum
 
 class DashboardStats(models.Model):
     games_played = models.IntegerField()
@@ -18,7 +18,32 @@ class DashboardStats(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # You might want to add fields for total goals, assists, etc.
+    def total_goals(self):
+        return self.playergamestats_set.aggregate(Sum('goals'))['goals__sum'] or 0
+
+    def total_assists(self):
+        return self.playergamestats_set.aggregate(Sum('assists'))['assists__sum'] or 0
+
+    def total_completed_passes(self):
+        return self.playergamestats_set.aggregate(Sum('completed_passes'))['completed_passes__sum'] or 0
+
+    def total_total_passes(self):
+        return self.playergamestats_set.aggregate(Sum('total_passes'))['total_passes__sum'] or 0
+
+    def total_turnovers(self):
+        return self.playergamestats_set.aggregate(Sum('turnovers'))['turnovers__sum'] or 0
+
+    def total_saves(self):
+        return self.playergamestats_set.aggregate(Sum('saves'))['saves__sum'] or 0
+
+    def total_clean_sheets(self):
+        return self.playergamestats_set.aggregate(Sum('clean_sheets'))['clean_sheets__sum'] or 0
+
+    def total_yellow_cards(self):
+        return self.playergamestats_set.aggregate(Sum('yellow_cards'))['yellow_cards__sum'] or 0
+
+    def total_red_cards(self):
+        return self.playergamestats_set.aggregate(Sum('red_cards'))['red_cards__sum'] or 0
 
 class StatsPerGame(models.Model):
     vs = models.CharField(max_length=100, blank=True, null=True)

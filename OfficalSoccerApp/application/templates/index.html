@@ -21,7 +21,7 @@
         <h1>Soccer App</h1>
         
         <div href="../templates/addGame.html">
-            <a href="{%url 'game'%}">
+            <a href="{%url 'add_game'%}">
                 <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem;">
                     Add Game<!-- Dynamic, data-bs-target connects to NEW WEBPAGE -->
                 </button>
@@ -108,7 +108,17 @@
                 <div class="modal-body">
                     <p>Date: {{ game.date }}</p>
                     {% for player_stat in game.playergamestats_set.all %}
-                        <p>{{ player_stat.player.name }} - Goals: {{ player_stat.goals }}, Assists: {{ player_stat.assists }}</p>
+                    {{ player_stat.player.name }} - 
+                    Goals: {{ player_stat.goals }},
+                    Assists: {{ player_stat.assists }},
+                    Completed Passes: {{ player_stat.completed_passes }},
+                    Total Passes: {{ player_stat.total_passes }},
+                    Turnovers: {{ player_stat.turnovers }},
+                    Saves: {{ player_stat.saves }},
+                    Clean Sheets: {{ player_stat.clean_sheets }},
+                    Yellow Cards: {{ player_stat.yellow_cards }},
+                    Red Cards: {{ player_stat.red_cards }}
+                </p>
                     {% endfor %}
                 </div>
                 <div class="modal-footer">

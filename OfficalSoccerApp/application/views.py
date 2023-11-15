@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import DashboardStatsForm, StatsPerGameForm, PlayerForm, PlayerGameStatsFormset
 from .models import DashboardStats, StatsPerGame, Player
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-# User login view
+from django.db import transaction
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -52,45 +52,63 @@ def player_create_view(request):
             player.user = request.user
             player.save()
             messages.success(request, "Player created successfully.")
-            return redirect('home')
-    else:
-        form = PlayerForm()
-    return render(request, 'player_form.html', {'form': form})
+    return redirect('playerhome')
 
 # Home view showing games won and lost
 @login_required
 def home(request):
     games_lost = StatsPerGame.objects.filter(user=request.user, wl=False)
     games_won = StatsPerGame.objects.filter(user=request.user, wl=True)
-    form = StatsPerGameForm()
-    formset = PlayerGameStatsFormset()
-    return render(request, 'index.html', {'form': form, 'formset': formset, 'games_lost': games_lost, 'games_won': games_won})
+    
+    return render(request, 'index.html', {'games_lost': games_lost, 'games_won': games_won})
 
 # View for adding a game and its stats
 @login_required
 def add_game(request):
     if request.method == 'POST':
-        form = StatsPerGameForm(request.POST)
-        formset = PlayerGameStatsFormset(request.POST)
-        print(formset)
-        if form.is_valid() and formset.is_valid():
-            game = form.save(commit=False)
-            game.user = request.user
-            game.save()
-            formset.instance = game
-            formset.save()
-            messages.success(request, "Game and stats added successfully.")
-    return redirect('home')
+        game_form = StatsPerGameForm(request.POST)
+        if game_form.is_valid():
+            with transaction.atomic():
+                new_game = game_form.save(commit=False)
+                new_game.user = request.user
+                new_game.save()
+
+                for player in Player.objects.all():
+                    formset = PlayerGameStatsFormset(request.POST, prefix=str(player.id))
+                    if formset.is_valid():
+                        instances = formset.save(commit=False)
+                        for instance in instances:
+                            instance.game = new_game
+                            instance.player = player
+                            instance.save()
+
+                messages.success(request, "New game and player stats added successfully.")
+                return redirect('home')
+        else:
+            messages.error(request, "There were errors in the submission.")
+    else:
+        game_form = StatsPerGameForm()
+
+    # Create an empty formset for each player
+    player_stats_formsets = {
+        player.id: PlayerGameStatsFormset(prefix=str(player.id))
+        for player in Player.objects.all()
+    }
+
+    return render(request, 'addGame.html', {
+        'game_form': game_form,
+        'player_stats_formsets': player_stats_formsets,
+    })
+
 
 
 def playerhome(request):
-    pass
-
-def game(request):
-    form = StatsPerGameForm()
-    formset = PlayerGameStatsFormset()
+    players = Player.objects.all()
+    form = PlayerForm()
     context = {
-        'game_form': form,
-        'player_stats_formset': formset
+        'players': players,
+        'form': form
     }
-    return render(request, 'addGame.html', context)
+    return render(request, 'player.html', context)
+
+

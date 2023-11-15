@@ -45,13 +45,10 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{%url 'create'%}" method="post">
+                            <form action="{%url 'createplayer'%}" method="POST">
                                 {% csrf_token %}
 
-                                <div class="form-group">
-                                    <label for="player"> Player:</label> <!-- player  -->
-                                    <input type="text" class="form-control" id="player.name" name="player">
-                                </div>
+                                {{form.as_p}}
                                 
                                 <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 1rem;">
                             </form>
@@ -84,15 +81,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <p>Goals: {{ player.playerstats.goals }}</p>
-                    <p>Assists: {{ player.playerstats.assists }}</p>
-                    <p>Completed Passes: {{ player.playerstats.completed_passes }}</p>
-                    <p>Total Passes: {{ player.playerstats.total_passes }}</p>
-                    <p>Turnovers: {{ player.playerstats.turnovers }}</p>
-                    <p>Saves: {{ player.playerstats.saves }}</p>
-                    <p>Clean Sheets: {{ player.playerstats.clean_sheets }}</p>
-                    <p>Yellow Cards: {{ player.playerstats.yellow_cards }}</p>
-                    <p>Red Cards: {{ player.playerstats.red_cards }}</p>
+                        <div class="modal-body">
+                            <p>Goals: {{ player.total_goals }}</p>
+                            <p>Assists: {{ player.total_assists }}</p>
+                            <p>Completed Passes: {{ player.total_completed_passes }}</p>
+                            <p>Total Passes: {{ player.total_total_passes }}</p>
+                            <p>Turnovers: {{ player.total_turnovers }}</p>
+                            <p>Saves: {{ player.total_saves }}</p>
+                            <p>Clean Sheets: {{ player.total_clean_sheets }}</p>
+                            <p>Yellow Cards: {{ player.total_yellow_cards }}</p>
+                            <p>Red Cards: {{ player.total_red_cards }}</p>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
