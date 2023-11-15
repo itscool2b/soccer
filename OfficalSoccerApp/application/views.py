@@ -26,15 +26,28 @@ def user_logout(request):
 # DashboardStats creation view
 @login_required
 def dash(request):
-    stats = get_object_or_404(DashboardStats, user=request.user)
-    stats.update_game_stats()
-    stats.update_totals()
-    try:
-        dash = DashboardStats.objects.get(user=request.user)
-    except DashboardStats.DoesNotExist:
-        # Handle the case where DashboardStats does not exist for the user
-        dash = None
-    return render(request,'dash.html', {'stats': dash})
+    # Try to get or create DashboardStats for the current user
+    stats, created = DashboardStats.objects.get_or_create(
+        user=request.user,
+        defaults={
+            'games_played': 0,
+            'wins': 0,
+            'losses': 0,
+            'total_goals': 0,
+            'total_saves': 0,
+            'total_assists': 0,
+            'total_clean_sheets': 0,
+            'total_yellow_cards': 0,
+            'total_red_cards': 0
+        }
+    )
+
+    # Update stats only if not newly created, or based on your logic
+    if not created:
+        stats.update_game_stats()
+        stats.update_totals()
+
+    return render(request, 'dash.html', {'stats': stats})
 # View for creating or updating players
 @login_required
 def player_create_view(request):
