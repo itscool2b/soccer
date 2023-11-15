@@ -1,0 +1,59 @@
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type=text],
+input[type=number],
+input[type=date],
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #0044cc;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 12px;
+    margin-top: 20px;
+}
+
+input[type=submit]:hover {
+    background-color: #003399;
+}
+
+label,
+fieldset {
+    display: block;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+    }
+}

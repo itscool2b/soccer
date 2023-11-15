@@ -19,25 +19,26 @@
         
         <h1>Soccer App</h1>
         
-        <div href="../templates/addGame.html">
-            <a href="{%url 'home'%}"> 
-                <button type="button" class="btn btn-primary px-3 d-block" style="width: 100%; max-width: 200px; padding-left: 1rem; padding-right: 1rem;" >
-                    Home 
+        <nav class="flex-header">
+            <a href="{% url 'home' %}" class="nav-button">
+                <button type="button" class="btn btn-primary">
+                    Home
                 </button>
             </a>
-
-            <a href="{% url 'playerhome' %}">
-                <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
+        
+            <a href="{% url 'playerhome' %}" class="nav-button">
+                <button type="button" class="btn btn-primary" style="margin-left: 10px;" >
                     Player Stats
                 </button>
             </a>
-
-            <a href="{% url 'dash' %}">
-                <button type="button" class="btn btn-primary px-3" style="width: auto; padding-left: 1rem; padding-right: 1rem; margin-left: 10px;">
+        
+            <a href="{% url 'dash' %}" class="nav-button">
+                <button type="button" class="btn btn-primary" style="margin-left: 10px;">
                     Dashboard
                 </button>
             </a>
-        </div>
+        </nav>
+        
     
     </header>
     
