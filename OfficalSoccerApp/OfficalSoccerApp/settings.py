@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gnr4hn(s_b*%#@fdvo(eiw_i*9a(#$3!wj=g6a8#vi2*r+*iqp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['wpssoccerapp.vercel.app', 'localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['.vercel.app','now.sh','127.0.0.1','localhost']
 
 
 # Application definition
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'OfficalSoccerApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': '14d2g-CaAGaEbCBC6-BF-Dbe22aEFeD*',
+        'HOST': 'viaduct.proxy.rlwy.net',
+        'PORT': '52908',
     }
 }
 
@@ -117,10 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'application/static',
-]  # Change this as needed
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 
 # Default primary key field type
