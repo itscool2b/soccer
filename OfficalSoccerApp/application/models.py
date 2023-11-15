@@ -12,8 +12,42 @@ class DashboardStats(models.Model):
     total_clean_sheets = models.IntegerField()
     total_yellow_cards = models.IntegerField()
     total_red_cards = models.IntegerField()
-    total_blue_cards = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def update_game_stats(self):
+        # Count the total number of games
+        self.games_played = StatsPerGame.objects.count()
+
+        # Count the number of wins and losses
+        self.wins = StatsPerGame.objects.filter(wl=True).count()
+        self.losses = StatsPerGame.objects.filter(wl=False).count()
+
+        # Save the updated statistics
+        self.save()
+
+    def update_totals(self):
+        # Calculate totals from PlayerGameStats
+        aggregated_stats = PlayerGameStats.objects.aggregate(
+            total_goals=Sum('goals'),
+            total_saves=Sum('saves'),
+            total_assists=Sum('assists'),
+            total_clean_sheets=Sum('clean_sheets'),
+            total_yellow_cards=Sum('yellow_cards'),
+            total_red_cards=Sum('red_cards')
+        )
+
+        # Update the fields in DashboardStats
+        self.total_goals = aggregated_stats.get('total_goals', 0)
+        self.total_saves = aggregated_stats.get('total_saves', 0)
+        self.total_assists = aggregated_stats.get('total_assists', 0)
+        self.total_clean_sheets = aggregated_stats.get('total_clean_sheets', 0)
+        self.total_yellow_cards = aggregated_stats.get('total_yellow_cards', 0)
+        self.total_red_cards = aggregated_stats.get('total_red_cards', 0)
+
+        # Save the updated totals
+        self.save()
+
+
 
 class Player(models.Model):
     name = models.CharField(max_length=100)

@@ -26,22 +26,15 @@ def user_logout(request):
 # DashboardStats creation view
 @login_required
 def dash(request):
-    if request.method == 'POST':
-        form = DashboardStatsForm(request.POST)
-        if form.is_valid():
-            dashboard_stat = form.save(commit=False)
-            dashboard_stat.user = request.user
-            dashboard_stat.save()
-            messages.success(request, "Stats successfully saved.")
-            return redirect('dash')
-        else:
-            messages.error(request, "Something went wrong. Please check the form and try again.")
-    else:
-        form = DashboardStatsForm()
-    
-    all_stats = DashboardStats.objects.filter(user=request.user)
-    return render(request, "dash.html", {'form': form, 'all_stats': all_stats})
-
+    stats = get_object_or_404(DashboardStats, user=request.user)
+    stats.update_game_stats()
+    stats.update_totals()
+    try:
+        dash = DashboardStats.objects.get(user=request.user)
+    except DashboardStats.DoesNotExist:
+        # Handle the case where DashboardStats does not exist for the user
+        dash = None
+    return render(request,'dash.html', {'stats': dash})
 # View for creating or updating players
 @login_required
 def player_create_view(request):

@@ -40,7 +40,7 @@
                             <img src="../static/images/soccer-ball-goal.webp" alt="Img" class="img-fluid rounded">
                         </div>
                         <h3 class="fs-2 text-body-emphasis">Total games</h3> <!-- Dynamic Data -->
-                        <p class="fs-3">100</p>
+                        <p class="fs-3">{{stats.games_played}}</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -49,7 +49,7 @@
                             <img src="../static/images/soccer-ball-goal.webp" alt="Img" class="img-fluid rounded">
                         </div>
                         <h3 class="fs-2 text-body-emphasis">Games Won</h3> <!-- Dynamic Data -->
-                        <p class="fs-3">50</p>
+                        <p class="fs-3">{{stats.wins}}</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -58,7 +58,7 @@
                             <img src="../static/images/soccer-ball-goal.webp" alt="Img" class="img-fluid rounded">
                         </div>
                         <h3 class="fs-2 text-body-emphasis">Games Lost</h3> <!-- Dynamic Data -->
-                        <p class="fs-3">50</p>
+                        <p class="fs-3">{{stats.losses}}</p>
                     </div>
                 </div>
             </div>
@@ -73,13 +73,9 @@
                         <h5 class="modal-title">Add New Stats</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    
                         
-                        <form action="{%url 'dash'%}"  method="post"> <!-- Form action links to Dynamic shit -->
-                            {%csrf_token%}
-
-                            {{ form.as_p }}
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                    
     </section>
 
     <section class="p-4">
@@ -92,7 +88,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Total Saves</th>
-                    <td>{{stats.wins}}</td> <!-- Dynamic Data -->
+                    <td>{{stats.total_saves}}</td> <!-- Dynamic Data -->
                 </tr>
                 <tr>
                     <th scope="row">Total Assists</th>
