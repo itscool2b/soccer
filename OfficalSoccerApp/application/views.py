@@ -85,3 +85,12 @@ def add_game(request):
 
 def playerhome(request):
     pass
+
+def game(request):
+    form = StatsPerGameForm()
+    formset = PlayerGameStatsFormset()
+    context = {
+        'game_form': form,
+        'player_stats_formset': formset
+    }
+    return render(request, 'addGame.html', context)
