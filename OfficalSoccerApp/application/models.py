@@ -18,6 +18,10 @@ class DashboardStats(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
     def total_goals(self):
         return self.playergamestats_set.aggregate(Sum('goals'))['goals__sum'] or 0
 
