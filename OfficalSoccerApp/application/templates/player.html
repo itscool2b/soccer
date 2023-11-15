@@ -58,7 +58,16 @@
             </div>
         </section>
 
-        <div class="player-page-container">
+        <div class="player-page-container" style="
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;"
+            >
             {% for player in players %}
             <section>
                 <div class="card" style="width: 18rem; margin-bottom: 20px;">
