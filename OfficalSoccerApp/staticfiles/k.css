@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body, .container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: #0f4c81;
+    padding: 1.5rem 1.5rem !important;
+}
+
+.flex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;  
+    flex-wrap: wrap;
+}
+
+.flex-header {
+    background-color: #0f4c81;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+.btn-primary {
+    background-color: #0077b6;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.logo {
+    max-width: 80px;
+    width: 100%;
+    height: auto;
+    margin-right: 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.add-game-button {
+    background-color: #5397dc;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-game-button:hover {
+    background-color: #3a8bc1;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
+}
+
+.card {
+    width: 14rem; 
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    max-height: 80px; 
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0.5rem; 
+}
+
+.card-title {
+    font-size: 1rem; 
+}
+
+.card-text {
+    font-size: 0.8rem;
+}
+
+.btn {
+    padding: 0.25rem 0.5rem; 
+    font-size: 0.8rem; 
+}
+
+.editButton {
+    background-color: #007BFF;
+    color: #FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+}
+
+.editButton:hover {
+    background-color: #0056b3;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; 
+    padding: 20px;
+    justify-content: center; 
+}
+
+@media (max-width: 768px) { 
+    header {
+        padding: 1rem; 
+    }
+
+    .flex-header {
+        justify-content: center; 
+    }
+
+    .logo {
+        margin-bottom: 1rem; 
+    }
+
+    .btn-primary {
+        display: block; 
+        width: 100%; 
+        margin: 5px 0; 
+    }
+}
+
+
+
+
+
+
